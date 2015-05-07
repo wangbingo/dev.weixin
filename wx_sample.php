@@ -3,7 +3,8 @@
   * wechat php test
   */
 
-require_once("common/global.php") ; 
+require_once("common/global.php")
+ ; 
 global $Config;
 define("MYSQLPWD",$Config["DB_PWD"]);
 
@@ -30,7 +31,8 @@ class wechatCallbackapiTest
     {
     
     $con=mysql_connect("127.0.0.1","root",MYSQLPWD); 	
-    mysql_select_db("weixin") or die("Unable to select database");
+    mysql_select_db("weixin")
+ or die("Unable to select database");
     mysql_query("SET NAMES UTF8");
   
  		//get post data, May be due to the different environments
@@ -80,11 +82,12 @@ class wechatCallbackapiTest
 			                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
 			                	echo $resultStr;               				
               			}else{
-			                	$contentStr = "非数字型，Welcome to ".$keyword." 世界! 这是一个来自".$fromUsername."消息，它发送给公众帐号:".$toUsername;
+			                	$contentStr = "非数字型，Welcome to ".$keyword." 的伟大光荣正确世界! 这是一个来自".$fromUsername."消息，它发送给公众帐号:".$toUsername;
 			                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
 			                	echo $resultStr;               				
               				
-              			} 
+              			}
+ 
               				 
               				  
               				  
