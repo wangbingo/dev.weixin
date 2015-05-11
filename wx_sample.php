@@ -7,7 +7,7 @@ require_once("common/global.php")
  ; 
 global $Config;
 define("MYSQLPWD",$Config["DB_PWD"]);
-
+//
 //define your token
 define("TOKEN", "weixin");
 $wechatObj = new wechatCallbackapiTest();
