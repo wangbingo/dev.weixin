@@ -252,7 +252,7 @@ class wechatCallbackapiTest
 														else{
 															$echostrtmpt="";
 															foreach ($result2['results'] as $tweet) {
-																$echostrtmpt= $echostrtmpt. "\r\n\r\n".$tweet['name']."  ".$tweet['address']."  ".$tweet['telephone'];
+																$echostrtmpt= $echostrtmpt."\r\n\r\n".$tweet['name']."  ".$tweet['address']."  ".$tweet['telephone'];
 															}
 													  }
 														$contentStr =	"附近的".$keyword."有：".	$echostrtmpt;													     	  	
