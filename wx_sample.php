@@ -49,7 +49,7 @@
                     if(!empty( $keyword ))
                     {
                         $msgType = "text";
-                        $contentStr = "Welcome to ".$keyword." 世界! \r\n这是一个来自".$fromUsername."消息。\r\n它发送给公众帐号:".$toUsername."\r\n时间是：".$time;
+                        $contentStr = "Welcome to ".$keyword." 世界! \r\n这是一个来自".$fromUsername."消息。\r\n它发送给公众帐号:".$toUsername."\r\n时间是：".date("Y-m-d H-i-s", $time);
                         $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                         echo $resultStr;
                     }else{
