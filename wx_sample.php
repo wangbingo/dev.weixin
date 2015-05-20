@@ -3,8 +3,7 @@
   * wechat php test
   */
 
-require_once("common/global.php")
- ; 
+require_once("common/global.php"); 
 global $Config;
 define("MYSQLPWD",$Config["DB_PWD"]);
 
@@ -30,10 +29,9 @@ class wechatCallbackapiTest
     public function responseMsg()
     {
     
-    $con=mysql_connect("127.0.0.1","root",MYSQLPWD); 	
-    mysql_select_db("weixin")
- or die("Unable to select database");
-    mysql_query("SET NAMES UTF8");
+        $con=mysql_connect("127.0.0.1","root",MYSQLPWD); 	
+        mysql_select_db("weixin") or die("Unable to select database");
+        mysql_query("SET NAMES UTF8");
   
  		//get post data, May be due to the different environments
 		$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
@@ -57,9 +55,9 @@ class wechatCallbackapiTest
 							</xml>";             
 				if(!empty( $keyword ))
                 {
-              		$msgType = "text";
+              		    $msgType = "text";
               		
-              		if (is_numeric($keyword)){
+              		    if (is_numeric($keyword)){
 		              		$sql="select * from score where ids=".$keyword ;
 		              		$result=mysql_query($sql);
 		 
@@ -75,66 +73,53 @@ class wechatCallbackapiTest
 		              		}     
 		              		mysql_close($con);         			
               			
-              		}else{
+              		    }else{
               			
-              			if ($keyword=="?"||$keyword=="？"){
-			                	$contentStr = "欢迎使用高考成绩模拟查询系统，输入您的准考证编号(1-10)并点击发送，可查看到您的高考成绩。\r\n\r\n另外，我们还提供了黄道吉日的查询，输入诸如2013.6.8此类的日期，点击发送，可看到您指定日期的黄道吉日查询结果。";
-			                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-			                	echo $resultStr;               				
-              			}else{
+              			    if ($keyword=="?"||$keyword=="？"){
+			                	    $contentStr = "欢迎使用高考成绩模拟查询系统，输入您的准考证编号(1-10)并点击发送，可查看到您的高考成绩。\r\n\r\n另外，我们还提供了黄道吉日的查询，输入诸如2013.6.8此类的日期，点击发送，可看到您指定日期的黄道吉日查询结果。";
+			                	    $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+			                	    echo $resultStr;               				
+              			    }else{
               			
-              					$V=explode(".",$keyword); 
-              					if (count($V)==3){
+              					    $V=explode(".",$keyword); 
+              					    if (count($V)==3){
               							$sql="select * from jixiong where years=".$V[0]." and months=".$V[1]." and days=".$V[2];
               							$result=mysql_query($sql);
               							$rsNextman=mysql_fetch_assoc($result);
               							if ($rsNextman){
-					                		$contentStr = $keyword."的黄道吉日是：\r\n\r\n宜：".$rsNextman["ji"]."\r\n\r\n忌：".$rsNextman["xiong"];              							
+					                	        $contentStr = $keyword."的黄道吉日是：\r\n宜：".$rsNextman["ji"]."\r\n忌：".$rsNextman["xiong"];              							
               							}else{
-						                	$contentStr = "无此数据";              							
+						                	    $contentStr = "无此数据";              							
               							} 
               							
-              							
-
 					                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
 					                	echo $resultStr;               					
               					
-              					}else{
+              					    }else{
 					                	$contentStr = "非数字型，Welcome to ".$keyword." 世界! 这是一个来自".$fromUsername."消息，它发送给公众帐号:".$toUsername;
 					                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
 					                	echo $resultStr;               					
-              					}
-              			
-              			
-              				
-              				
-              			}
- 
-              				 
-              				  
-              				  
-   
-		                	             			
-              		}
-              		
-
-              		
-
+              					    }              			
+              			              				              				
+              			    }
+               				               				                				     		                	             			
+              		    }
+              		              		
                 }else{
-                 	if($msgType=="event") {
-									              		$msgType = "text";
-									                	$contentStr = "Welcome to 微信开发者的世界! 输入?号可看到帮助说明。这是一个来自".$fromUsername."消息，它发送给公众帐号:".$toUsername;
-									                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-									                	echo $resultStr;                 	  
-                 	}else{
-                 	                	echo "Input something...";
-                 	}
+                 	    if($msgType=="event") {
+							$msgType = "text";
+							$contentStr = "Welcome to 微信开发者的世界! 输入?号可看到帮助说明。这是一个来自".$fromUsername."消息，它发送给公众帐号:".$toUsername;
+							$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+							echo $resultStr;                 	  
+                 	    }else{
+                 	        echo "Input something...";
+                 	    }
                 }
 
         }else {
 	
-        	echo "";
-        	exit;
+        	    echo "";
+        	    exit;
         }
     }
 		
