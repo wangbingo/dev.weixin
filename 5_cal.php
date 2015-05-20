@@ -3,12 +3,13 @@
   * wechat php test
   */
 
-require_once("common/global.php") ; 
+require_once("common/global.php")
+ ; 
 global $Config;
 define("MYSQLPWD",$Config["DB_PWD"]);
 
 //define your token
-define("TOKEN", "weixin888");
+define("TOKEN", "weixin");
 $wechatObj = new wechatCallbackapiTest();
 //$wechatObj->valid();
 $wechatObj->responseMsg();
@@ -30,7 +31,8 @@ class wechatCallbackapiTest
     {
     
     $con=mysql_connect("127.0.0.1","root",MYSQLPWD); 	
-    mysql_select_db("weixin") or die("Unable to select database");
+    mysql_select_db("weixin")
+ or die("Unable to select database");
     mysql_query("SET NAMES UTF8");
   
  		//get post data, May be due to the different environments
@@ -106,7 +108,8 @@ class wechatCallbackapiTest
               			
               				
               				
-              			} 
+              			}
+ 
               				 
               				  
               				  
