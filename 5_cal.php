@@ -76,7 +76,7 @@ class wechatCallbackapiTest
               		    }else{
               			
               			    if ($keyword=="?"||$keyword=="？"){
-			                	    $contentStr = "欢迎使用高考成绩模拟查询系统，输入您的准考证编号(1-10)并点击发送，可查看到您的高考成绩。\r\n\r\n另外，我们还提供了黄道吉日的查询，输入诸如2013.6.8此类的日期，点击发送，可看到您指定日期的黄道吉日查询结果。";
+			                	    $contentStr = "欢迎使用高考成绩模拟查询系统，输入您的准考证编号(1-10)并点击发送，可查看到您的高考成绩。\r\n另外，我们还提供了黄道吉日的查询，输入诸如2013.6.8此类的日期，点击发送，可看到您指定日期的黄道吉日查询结果。";
 			                	    $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
 			                	    echo $resultStr;               				
               			    }else{
