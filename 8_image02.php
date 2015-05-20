@@ -42,76 +42,68 @@ class wechatCallbackapiTest
                  
                 if ($msgType=="image"){
 		
-						        $textTpl = "<xml>
-																<ToUserName><![CDATA[%s]]></ToUserName>
-																<FromUserName><![CDATA[%s]]></FromUserName>
-																<CreateTime>%s</CreateTime>
-																<MsgType><![CDATA[%s]]></MsgType>
-																<Content><![CDATA[%s]]></Content>
-																<FuncFlag>0</FuncFlag>
-																</xml>";                 
-		
-		
-											$contentStr = "欢迎来到微信MOA系统：\r\n\r\n您刚才上传的图片已经保存在微信服务器上，浏览地址是：".$postObj->PicUrl; 
-						          $time = time();
-						          $msgType = "text";
-						          $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-						          echo $resultStr;	
+						$textTpl = "<xml>
+									<ToUserName><![CDATA[%s]]></ToUserName>
+									<FromUserName><![CDATA[%s]]></FromUserName>
+									<CreateTime>%s</CreateTime>
+									<MsgType><![CDATA[%s]]></MsgType>
+									<Content><![CDATA[%s]]></Content>
+									<FuncFlag>0</FuncFlag>
+									</xml>";                 
+		                $contentStr = "欢迎来到微信系统：\r\n您刚才上传的图片已经保存在微信服务器上，浏览地址是：".$postObj->PicUrl; 
+						$time = time();
+						$msgType = "text";
+						$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+						echo $resultStr;	
                 	
                 }  
                  
                 if ($msgType=="text"){ 
-                   $keyword = $postObj->Content;
-                   $CreateTime = time();
-                   $FuncFlag =  1 ;
+                        $keyword = $postObj->Content;
+                        $CreateTime = time();
+                        $FuncFlag =  1 ;
 
-
-                   if ($keyword=="景点"){  
+                        if ($keyword=="景点"){  
                     
-							        $newTplHeader = "<xml>
+							    $newTplHeader = "<xml>
 							            <ToUserName><![CDATA[{$fromUsername}]]></ToUserName>
 							            <FromUserName><![CDATA[{$toUsername}]]></FromUserName>
 							            <CreateTime>{$CreateTime}</CreateTime>
 							            <MsgType><![CDATA[news]]></MsgType>
 							            <ArticleCount>%s</ArticleCount><Articles>";
-							        $newTplItem = "<item>
+							    $newTplItem = "<item>
 							            <Title><![CDATA[%s]]></Title>
 							            <Description><![CDATA[%s]]></Description>
 							            <PicUrl><![CDATA[%s]]></PicUrl>
 							            <Url><![CDATA[%s]]></Url>
 							            </item>";
-							        $newTplFoot = "</Articles>
+							    $newTplFoot = "</Articles>
 							            <FuncFlag>%s</FuncFlag>
 							            </xml>"; 
   													 
   										
-  										$sql="select * from images order by ids limit 0,10";
-  										$result=mysql_query($sql);	
-  										$rsNextman=mysql_fetch_assoc($result);	
+  								$sql="select * from images order by ids limit 0,10";
+  								$result=mysql_query($sql);	
+  								$rsNextman=mysql_fetch_assoc($result);	
   										
-  										$itemsCount=0;
-  										$Content = "";
-  										while($rsNextman){
-  										  $itemsCount= $itemsCount+1;
-  										  $Content .=sprintf($newTplItem,$rsNextman["title"],$rsNextman["description"],$rsNextman["picUrl"],$rsNextman["url"]);  										
-  											$rsNextman=mysql_fetch_assoc($result);  
-  										}
+  								$itemsCount=0;
+  								$Content = "";
+  								while($rsNextman){
+  										$itemsCount= $itemsCount+1;
+  										$Content .=sprintf($newTplItem,$rsNextman["title"],$rsNextman["description"],$rsNextman["picUrl"],$rsNextman["url"]);  										
+  										$rsNextman=mysql_fetch_assoc($result);  
+  								}
  										 
-							        $header = sprintf($newTplHeader,$itemsCount);
-							        $footer = sprintf($newTplFoot,$FuncFlag);
-							        echo $header . $Content . $footer; 													                     
+							    $header = sprintf($newTplHeader,$itemsCount);
+							    $footer = sprintf($newTplFoot,$FuncFlag);
+							    echo $header . $Content . $footer; 													                     
                      
                    }
-		
-
                 	
-                }                  
+                }                                  
                  
-                 
-
-
+        }
     }
-  }
 		
 	private function checkSignature()
 	{
