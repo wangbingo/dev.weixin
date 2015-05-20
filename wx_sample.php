@@ -54,7 +54,7 @@ class wechatCallbackapiTest
 			if ($msgFromType=="text"){ 
 				$keyword = trim($postObj->Content);
 				if ($keyword=="?"||$keyword=="？"||$keyword=="点歌"){ 
-					$contentStr = "歌曲列表：\r\n\r\n1、王菲-红豆\r\n2、王菲-棋子\r\n3、王菲-容易受伤的女人\r\n4、王菲-天空\r\n5、王菲-我愿意\r\n6、王菲-旋木\r\n7、王菲-执迷不悔\r\n\r\n输入以上歌曲的数字序号就可在线点歌"; 
+					$contentStr = "歌曲列表：\r\n1、王菲-红豆\r\n2、王菲-棋子\r\n3、王菲-容易受伤的女人\r\n4、王菲-天空\r\n5、王菲-我愿意\r\n6、王菲-旋木\r\n7、王菲-执迷不悔\r\n输入以上歌曲的数字序号就可在线点歌"; 
 					$msgType = "text";
 					$time = time();
 					$textTpl = "<xml>
