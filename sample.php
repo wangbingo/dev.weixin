@@ -4,60 +4,32 @@ define('APP_ID', 'wxa2fcb958aa1654e1');
 
 define('APP_SECRET', 'ae2f3bb2ad98fa86eccc6d147fb5e095');
 
-function get_file_token() {
+function mem_token() {
 
+    $mmc = memcache_init();
 
-    if (exists_token()){
+    $mmc->setOption(Memcached::OPT_COMPRESSION, false);
 
-        if (expire_token()) {
+    $mmc->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
 
-            unlink('/var/www/html/token.txt');
+    $token = $mmc->get('token');
 
-            $token = get_token();
-
-            file_put_contents('/var/www/html/token.txt', $token);
-
-            return $token;
-
-        } else {
-
-            $token = file_get_contents('/var/www/html/token.txt');
-
-            return $token;
-
-        }
-
-    } else {
-        
-        $token = get_token();
-
-        file_put_contents('/var/www/html/token.txt', $token);
+    if (!empty($token)) {
 
         return $token;
 
-    }
-
-}
-
-//判断令牌存放文件是否存在
-function exists_token() {
-    if (file_exists('/var/www/html/token.txt')) {
-        return true;
     } else {
-        return false;
+
+        $token = get_token();
+
+        $mmc->set('token', $token, 7000);
     }
+
+    return $token;
+
 }
 
-//判断令牌文件是否过期
-function expire_token() {
-    $ctime = filectime('/var/www/html/token.txt');
 
-    if ((time() - $ctime) >= 60) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 //获取当前令牌
 function get_token() {
@@ -80,16 +52,37 @@ function get_token() {
 
     $obj = json_decode($output, true);
 
-    //var_dump($obj['access_token']);
-
     return $obj['access_token'];
 
 }
 
 
-$ttttt = get_file_token();
+$ttttt = mem_token();
 
 var_dump($ttttt);
 
 exit;
+
+/*
+
+<?php
+
+$mmc=memcache_init();
+if($mmc==false)
+    echo "mc init failed\n";
+else
+{
+    memcache_set($mmc,"key","value");
+    echo memcache_get($mmc,"key");
+}
+
+?>
+
+*/
+
+
+
+
+
+
 
