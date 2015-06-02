@@ -6,25 +6,22 @@ define('APP_SECRET', 'ae2f3bb2ad98fa86eccc6d147fb5e095');
 
 function get_file_token() {
 
-    var_dump(exists_token());
-
-    exit;
 
     if (exists_token()){
 
         if (expire_token()) {
 
-            unlink('token.txt');
+            unlink('/var/www/html/token.txt');
 
             $token = get_token();
 
-            file_put_contents('token.txt', $token);
+            file_put_contents('/var/www/html/token.txt', $token);
 
             return $token;
 
         } else {
 
-            $token = file_get_contents('token.txt');
+            $token = file_get_contents('/var/www/html/token.txt');
 
             return $token;
 
@@ -34,7 +31,7 @@ function get_file_token() {
         
         $token = get_token();
 
-        file_put_contents('token.txt', $token);
+        file_put_contents('/var/www/html/token.txt', $token);
 
         return $token;
 
@@ -44,7 +41,7 @@ function get_file_token() {
 
 //判断令牌存放文件是否存在
 function exists_token() {
-    if (file_exists('token.txt')) {
+    if (file_exists('/var/www/html/token.txt')) {
         return true;
     } else {
         return false;
@@ -53,7 +50,7 @@ function exists_token() {
 
 //判断令牌文件是否过期
 function expire_token() {
-    $ctime = filectime('token.txt');
+    $ctime = filectime('/var/www/html/token.txt');
 
     if ((time() - $ctime) >= 7000) {
         return true;
@@ -91,6 +88,8 @@ function get_token() {
 
 
 $ttttt = get_file_token();
+
+var_dump($ttttt);
 
 exit;
 
