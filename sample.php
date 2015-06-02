@@ -52,7 +52,7 @@ function exists_token() {
 function expire_token() {
     $ctime = filectime('/var/www/html/token.txt');
 
-    if ((time() - $ctime) >= 7000) {
+    if ((time() - $ctime) >= 60) {
         return true;
     } else {
         return false;
