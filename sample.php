@@ -1,89 +1,92 @@
 <?php
-/**
-  * wechat php test
-  */
 
-//define your token
-define("TOKEN", "weixin");
-$wechatObj = new wechatCallbackapiTest();
-$wechatObj->valid();
+define('APP_ID', 'wxa2fcb958aa1654e1');
 
-class wechatCallbackapiTest
-{
-	public function valid()
-    {
-        $echoStr = $_GET["echostr"];
+define('APP_SECRET', 'ae2f3bb2ad98fa86eccc6d147fb5e095');
 
-        //valid signature , option
-        if($this->checkSignature()){
-        	echo $echoStr;
-        	exit;
+function get_file_token() {
+
+    if (exists_token()){
+
+        if (expire_token()) {
+
+            unlink('token.txt');
+
+            $token = get_token();
+
+            file_put_contents('token.txt', $token);
+
+            return $token;
+
+        } else {
+
+            $token = file_get_contents('token.txt');
+
+            return $token;
+
         }
-    }
 
-    public function responseMsg()
-    {
-		//get post data, May be due to the different environments
-		$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-
-      	//extract post data
-		if (!empty($postStr)){
-                /* libxml_disable_entity_loader is to prevent XML eXternal Entity Injection,
-                   the best way is to check the validity of xml by yourself */
-                libxml_disable_entity_loader(true);
-              	$postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-                $fromUsername = $postObj->FromUserName;
-                $toUsername = $postObj->ToUserName;
-                $keyword = trim($postObj->Content);
-                $time = time();
-                $textTpl = "<xml>
-							<ToUserName><![CDATA[%s]]></ToUserName>
-							<FromUserName><![CDATA[%s]]></FromUserName>
-							<CreateTime>%s</CreateTime>
-							<MsgType><![CDATA[%s]]></MsgType>
-							<Content><![CDATA[%s]]></Content>
-							<FuncFlag>0</FuncFlag>
-							</xml>";             
-				if(!empty( $keyword ))
-                {
-              		$msgType = "text";
-                	$contentStr = "Welcome to wechat world!";
-                	$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-                	echo $resultStr;
-                }else{
-                	echo "Input something...";
-                }
-
-        }else {
-        	echo "";
-        	exit;
-        }
-    }
-		
-	private function checkSignature()
-	{
-        // you must define TOKEN by yourself
-        if (!defined("TOKEN")) {
-            throw new Exception('TOKEN is not defined!');
-        }
+    } else {
         
-        $signature = $_GET["signature"];
-        $timestamp = $_GET["timestamp"];
-        $nonce = $_GET["nonce"];
-        		
-		$token = TOKEN;
-		$tmpArr = array($token, $timestamp, $nonce);
-        // use SORT_STRING rule
-		sort($tmpArr, SORT_STRING);
-		$tmpStr = implode( $tmpArr );
-		$tmpStr = sha1( $tmpStr );
-		
-		if( $tmpStr == $signature ){
-			return true;
-		}else{
-			return false;
-		}
-	}
+        $token = get_token();
+
+        file_put_contents('token.txt', $token);
+
+        return $token;
+
+    }
+
 }
 
-?>
+//判断令牌存放文件是否存在
+function exists_token() {
+    if (file_exists('token.txt')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//判断令牌文件是否过期
+function expire_token() {
+    $ctime = filectime('token.txt');
+
+    if ((time() - $ctime) >= 7000) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//获取当前令牌
+function get_token() {
+
+    $ch = curl_init();
+
+    $url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.APP_ID.'&secret='.APP_SECRET;
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+
+    curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+
+    $output = curl_exec($ch);
+
+    curl_close($ch);
+
+    $obj = json_decode($output, true);
+
+    //var_dump($obj['access_token']);
+
+    return $obj['access_token'];
+
+}
+
+
+var_dump(get_file_token());
+
+exit;
+
