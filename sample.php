@@ -6,6 +6,10 @@ define('APP_SECRET', 'ae2f3bb2ad98fa86eccc6d147fb5e095');
 
 function get_file_token() {
 
+    var_dump(exists_token());
+
+    exit;
+
     if (exists_token()){
 
         if (expire_token()) {
@@ -86,7 +90,7 @@ function get_token() {
 }
 
 
-var_dump(get_file_token());
+$ttttt = get_file_token();
 
 exit;
 
