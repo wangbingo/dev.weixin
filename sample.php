@@ -4,9 +4,13 @@ define('APP_ID', 'wxa2fcb958aa1654e1');
 
 define('APP_SECRET', 'ae2f3bb2ad98fa86eccc6d147fb5e095');
 
+
 function mem_token() {
 
     $mmc = memcache_init();
+
+    var_dump($mmc);
+    exit;
 
     $mmc->setOption(Memcached::OPT_COMPRESSION, false);
 
