@@ -7,6 +7,6 @@
 //var_dump($postStr);
 
 
-include 'mem.php';
+include '/var/www/html/mem.php';
 
 echo mem_token();
