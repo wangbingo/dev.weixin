@@ -9,4 +9,4 @@
 
 include '/var/www/html/mem.php';
 
-echo mem_token();
+var_dump(mem_token());
