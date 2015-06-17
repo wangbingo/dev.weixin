@@ -15,7 +15,10 @@
 
 //echo "hello";
 
-include 'aa.php';
+function fun(){
+    fun();
+}
+fun();
 
 
 
