@@ -1,6 +1,6 @@
 <?php
 phpinfo();
-var_dump(expression)
+var_dump($expression);
 ?>
 
 
