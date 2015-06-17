@@ -11,14 +11,11 @@
 
 //var_dump(mem_token());
 
-//phpinfo();
+phpinfo();
 
 //echo "hello";
 
-function fun(){
-    fun();
-}
-fun();
+
 
 ?>
 
