@@ -11,9 +11,11 @@
 
 //var_dump(mem_token());
 
-phpinfo();
+//phpinfo();
 
 //echo "hello";
+
+include "aa.php";
 
 
 
