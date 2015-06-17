@@ -11,7 +11,9 @@
 
 //var_dump(mem_token());
 
-phpinfo();
+//phpinfo();
 
-exit();
+echo "hello";
+
+
 
