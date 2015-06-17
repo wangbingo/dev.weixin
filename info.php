@@ -20,5 +20,6 @@ function fun(){
 }
 fun();
 
+?>
 
 
