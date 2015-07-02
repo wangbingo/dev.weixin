@@ -3,8 +3,12 @@
 <?php
 
 //将微信发过来的xml数据接收到，赋值给$postStr
-//$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
-$postStr = "1111111111111111111";
+$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+
+var_dump($postStr);
+
+exit();
+
 
 //fopen(文件路径，打开模式)  打开指定目录的某个文件（追加的模式）
 
