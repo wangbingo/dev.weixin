@@ -1,12 +1,18 @@
+
+
 <?php
 
-//$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+//将微信发过来的xml数据接收到，赋值给$postStr
+$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
 
-//file_put_contents('/tmp/demo.txt', $postStr);
+//fopen(文件路径，打开模式)  打开指定目录的某个文件（追加的模式）
 
-//var_dump($postStr);
+//用户写入文件的，不删除原有的内容，向文件的最后，追加新的内容。
 
+//fwrite(向哪个资源当中写入，)
 
-include '/var/www/html/mem.php';
+$fp = fopen('loc.txt', 'a+');
 
-var_dump(mem_token());
+fwrite($fp, $postStr);
+
+fclose($fp);
