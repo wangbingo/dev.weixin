@@ -11,7 +11,7 @@ $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
 
 //fwrite(向哪个资源当中写入，)
 
-$fp = fopen('loc.txt', 'a+');
+$fp = fopen('/var/www/html/loc.txt', 'a+');
 
 fwrite($fp, $postStr);
 
