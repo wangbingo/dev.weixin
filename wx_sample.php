@@ -42,6 +42,12 @@ class wechatCallbackapiTest
 
         //extract post data
         if (!empty($postStr)){
+
+            $fp = fopen('/var/www/html/loc.txt', 'a+');
+
+            fwrite($fp, $postStr);
+
+            fclose($fp);
                 /* libxml_disable_entity_loader is to prevent XML eXternal Entity Injection,
                    the best way is to check the validity of xml by yourself */
                 libxml_disable_entity_loader(true);
