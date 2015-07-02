@@ -43,9 +43,9 @@ class wechatCallbackapiTest
         //extract post data
         if (!empty($postStr)){
 
-            var_dump($postStr);
+            //var_dump($postStr);
 
-            $fp = fopen('/var/www/html/loc.txt', 'a+');
+            $fp = fopen('/tmp/loc.txt', 'a+');
 
             fwrite($fp, $postStr);
 
