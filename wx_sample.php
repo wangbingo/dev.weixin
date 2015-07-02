@@ -3,7 +3,8 @@
 <?php
 
 //将微信发过来的xml数据接收到，赋值给$postStr
-$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+//$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+$postStr = "1111111111111111111";
 
 //fopen(文件路径，打开模式)  打开指定目录的某个文件（追加的模式）
 
@@ -16,3 +17,5 @@ $fp = fopen('/var/www/html/loc.txt', 'a+');
 fwrite($fp, $postStr);
 
 fclose($fp);
+
+//var_dump();
