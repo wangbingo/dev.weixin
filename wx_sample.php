@@ -79,10 +79,10 @@ class wechatCallbackapiTest
                             <Content><![CDATA[%s]]></Content>
                             <FuncFlag>0</FuncFlag>
                             </xml>";             
-                if(!empty( $keyword ))
+                if(!empty( $latitude ))
                 {
                     $msgType = "text";
-                    $contentStr = "亲爱的".$fromUsername."欢迎使用小渣渣系统！您的经度是：".$longitude."您的纬度是：".$latitude;
+                    $contentStr = "亲爱的".$fromUsername."。欢迎使用小渣渣系统！您的经度是：".$longitude."您的纬度是：".$latitude;
                     $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                     echo $resultStr;
                 }else{
