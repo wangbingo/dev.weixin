@@ -85,7 +85,7 @@ class wechatCallbackapiTest
                 if(!empty( $latitude ))
                 {
                     $msgType = "text";
-                    $distance = distance(30.657365639096422, 104.06584140743259, $latitude, $longitude);
+                    $distance = getDistance(30.657365639096422, 104.06584140743259, $latitude, $longitude);
                     //$distance = 100;
                     $contentStr = "亲爱的".$fromUsername."。欢迎使用小渣渣系统！您的经度是：".$longitude."，您的纬度是：".$latitude."。您距离天府广场的距离约".$distance."公里";
                     $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
