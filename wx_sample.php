@@ -23,12 +23,6 @@ fclose($fp);
 
 include ('lbs_fns.php');
 
-define('LONG', 104.051438);
-define("LAT", 30.542164)
-
-echo  LONG;
-exit;
-
 define("TOKEN", "weixin");
 $wechatObj = new wechatCallbackapiTest();
 //$wechatObj->valid();
@@ -94,6 +88,8 @@ class wechatCallbackapiTest
                 if(!empty( $latitude ))
                 {
                     $msgType = "text";
+                    const LONG = 104.051438;
+                    const LAT = 30.542164;
                     $long = $longitude-LONG;
                     $lat = $latitude-LAT;
                     //distance = sqrt( (($longitude-104.051438)*100000)*(($longitude-104.051438)*100000) + (($latitude-30.542164)*100000)*(($latitude-30.542164)*100000) );
