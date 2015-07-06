@@ -2,8 +2,8 @@
 
 <?php
 
-//echo sqrt(81000000000000);
-//exit;
+echo sqrt(81000000000000);
+exit;
 
 /*
 $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
