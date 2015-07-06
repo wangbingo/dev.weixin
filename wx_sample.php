@@ -2,8 +2,8 @@
 
 <?php
 
-echo sqrt(81000000000000);
-exit;
+//echo sqrt(81000000000000);
+//exit;
 
 /*
 $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
@@ -88,6 +88,10 @@ class wechatCallbackapiTest
                 if(!empty( $latitude ))
                 {
                     $msgType = "text";
+                    $long = $longitude-104.051438;
+                    $lat = $latitude-30.542164;
+                    echo  $long."  ".$lat;
+                    exit;
                     $distance = sqrt( (($longitude-104.051438)*100000)*(($longitude-104.051438)*100000) + (($latitude-30.542164)*100000)*(($latitude-30.542164)*100000) );
                     //$distance = getdistance($latitude, $longitude, 30.657366, 104.065841);
                     //$distance = getdistance(121.40233369999998, 31.2014966, 121.44552099999998, 31.22323799999999);
