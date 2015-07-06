@@ -85,7 +85,7 @@ class wechatCallbackapiTest
                 if(!empty( $latitude ))
                 {
                     $msgType = "text";
-                    $distance = sqrt( ($longitude-104.051438)*($longitude-104.051438)*10000000000 + ($latitude-30.542164)*($latitude-30.542164)*10000000000 );
+                    $distance = sqrt( (($longitude-104.051438)*100000)*(($longitude-104.051438)*100000) + (($latitude-30.542164)*100000)*(($latitude-30.542164)*100000) );
                     //$distance = getdistance($latitude, $longitude, 30.657366, 104.065841);
                     //$distance = getdistance(121.40233369999998, 31.2014966, 121.44552099999998, 31.22323799999999);
                     //$distance = 100;
