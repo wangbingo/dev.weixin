@@ -1,25 +1,19 @@
 <?php
+function rad($d)
+{
+       return $d * 3.1415926535898 / 180.0;
+}
 function getdistance($lat1, $lng1, $lat2, $lng2)
- {
-     $earthRadius = 6367000; //approximate radius of earth in meters
- 
-     /*
-       Convert these degrees to radians
-       to work with the formula
-     */
- 
-     $lat1 = ($lat1 * pi() ) / 180;
-     $lng1 = ($lng1 * pi() ) / 180;
- 
-     $lat2 = ($lat2 * pi() ) / 180;
-     $lng2 = ($lng2 * pi() ) / 180;
- 
-     
-     $calcLongitude = $lng2 - $lng1;
-     $calcLatitude = $lat2 - $lat1;
-     $stepOne = pow(sin($calcLatitude / 2), 2) + cos($lat1) * cos($lat2) * pow(sin($calcLongitude / 2), 2);  
-     $stepTwo = 2 * asin(min(1, sqrt($stepOne)));
-     $calculatedDistance = $earthRadius * $stepTwo;
- 
-     return round($calculatedDistance);
- }
+{
+    $EARTH_RADIUS = 6378.137;
+    $radLat1 = rad($lat1);
+    //echo $radLat1;
+   $radLat2 = rad($lat2);
+   $a = $radLat1 - $radLat2;
+   $b = rad($lng1) - rad($lng2);
+   $s = 2 * asin(sqrt(pow(sin($a/2),2) +
+    cos($radLat1)*cos($radLat2)*pow(sin($b/2),2)));
+   $s = $s *$EARTH_RADIUS;
+   $s = round($s * 10000) / 10000;
+   return $s;
+}
