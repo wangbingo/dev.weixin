@@ -17,6 +17,9 @@ fclose($fp);
 }
 
 */
+
+include "lbs_fns.php"
+
 define("TOKEN", "weixin");
 $wechatObj = new wechatCallbackapiTest();
 //$wechatObj->valid();
@@ -82,8 +85,7 @@ class wechatCallbackapiTest
                 if(!empty( $latitude ))
                 {
                     $msgType = "text";
-                    $distance = (sqrt(($latitude*100000-3065737)*($latitude*100000-3065737)+($longitude*100000-10406584)*($longitude*100000-10406584)))/1000;
-                    //$distance = 5;
+                    $distance = distance(30.65737, 104.06584, $latitude, $longitude);
                     $contentStr = "亲爱的".$fromUsername."。欢迎使用小渣渣系统！您的经度是：".$longitude."，您的纬度是：".$latitude."。您距离天府广场的距离约".$distance."公里";
                     $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                     echo $resultStr;
