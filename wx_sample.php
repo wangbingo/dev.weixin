@@ -85,11 +85,11 @@ class wechatCallbackapiTest
                 if(!empty( $latitude ))
                 {
                     $msgType = "text";
-                    $distance = sqrt( ($longitude-104.065841)*($longitude-104.065841)*10000 + ($latitude-30.657366)*($latitude-30.657366)*10000 );
-                    // getdistance($longitude, $latitude, 104.065841, 30.657366);
+                    //$distance = sqrt( ($longitude-104.065841)*($longitude-104.065841)*10000 + ($latitude-30.657366)*($latitude-30.657366)*10000 );
+                    $distance = getdistance($latitude, $longitude, 30.657366, 104.065841);
                     //$distance = getdistance(121.40233369999998, 31.2014966, 121.44552099999998, 31.22323799999999);
                     //$distance = 100;
-                    $contentStr = "亲爱的".$fromUsername."。欢迎使用小渣渣系统！您的经度是：".$longitude."，您的纬度是：".$latitude."。您距离天府广场的距离约".$distance."KM";
+                    $contentStr = "亲爱的".$fromUsername."。欢迎使用小渣渣系统！您的经度是：".$longitude."，您的纬度是：".$latitude."。您距离天府广场的距离约".$distance."M";
                     $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                     echo $resultStr;
                 }else{
