@@ -45,18 +45,31 @@ class wechatCallbackapiTest
 
             //var_dump($postStr);
 
-            $fp = fopen('/tmp/loc.txt', 'a+');
+            //$fp = fopen('/tmp/loc.txt', 'a+');
 
-            fwrite($fp, $postStr);
+            //fwrite($fp, $postStr);
 
-            fclose($fp);
+            //fclose($fp);
+            /*
+            <xml>
+            <ToUserName><![CDATA[gh_d9424e8e6cc5]]></ToUserName>
+            <FromUserName><![CDATA[o9kEMuNyg1_-xtG2j45lizHHrz58]]></FromUserName>
+            <CreateTime>1436167671</CreateTime>
+            <MsgType><![CDATA[event]]></MsgType>
+            <Event><![CDATA[LOCATION]]></Event>
+            <Latitude>30.543175</Latitude>
+            <Longitude>104.052330</Longitude>
+            <Precision>65.000000</Precision>
+            </xml>
+            */
                 /* libxml_disable_entity_loader is to prevent XML eXternal Entity Injection,
                    the best way is to check the validity of xml by yourself */
                 libxml_disable_entity_loader(true);
                 $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
                 $fromUsername = $postObj->FromUserName;
                 $toUsername = $postObj->ToUserName;
-                $keyword = trim($postObj->Content);
+                $latitude = $postObj->Latitude;
+                $longitude = $postObj->Longitude;
                 $time = time();
                 $textTpl = "<xml>
                             <ToUserName><![CDATA[%s]]></ToUserName>
@@ -69,7 +82,7 @@ class wechatCallbackapiTest
                 if(!empty( $keyword ))
                 {
                     $msgType = "text";
-                    $contentStr = "Welcome to wechat world!";
+                    $contentStr = "亲爱的".$fromUsername."欢迎使用小渣渣系统！您的经度是：".$longitude."您的纬度是：".$latitude;
                     $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                     echo $resultStr;
                 }else{
