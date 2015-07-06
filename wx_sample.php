@@ -23,7 +23,7 @@ fclose($fp);
 
 include ('lbs_fns.php');
 
-define("LONG", 104.051438);
+define('LONG', 104.051438);
 define("LAT", 30.542164)
 
 echo  LONG;
