@@ -2,6 +2,9 @@
 
 <?php
 
+echo sqrt(81);
+exit;
+
 /*
 $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
 
