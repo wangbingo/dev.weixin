@@ -2,8 +2,8 @@
 
 <?php
 
-echo sqrt(81000000000000);
-exit;
+//echo sqrt(81000000000000);
+//exit;
 
 /*
 $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
@@ -49,13 +49,13 @@ class wechatCallbackapiTest
         //extract post data
         if (!empty($postStr)){
 
-            //var_dump($postStr);
+            $fp = fopen('/tmp/loc.txt', 'a+');
 
-            //$fp = fopen('/tmp/loc.txt', 'a+');
+            fwrite($fp, $postStr);
 
-            //fwrite($fp, $postStr);
+            fclose($fp);
 
-            //fclose($fp);
+            exit;
             /*
             <xml>
             <ToUserName><![CDATA[gh_d9424e8e6cc5]]></ToUserName>
