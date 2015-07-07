@@ -92,11 +92,11 @@ class wechatCallbackapiTest
                     $LAT = 30.542164;
                     $long = ((double)$longitude-(double)$LONG)*100000;
                     $lat = ((double)$latitude-(double)$LAT)*100000;
-                    $distance = sqrt( $long * $long  + $lat * $lat );
+                    $distance = round(sqrt( $long * $long  + $lat * $lat ));
                     //$distance = getdistance($latitude, $longitude, 30.657366, 104.065841);
                     //$distance = getdistance(121.40233369999998, 31.2014966, 121.44552099999998, 31.22323799999999);
                     //$distance = 100;
-                    $contentStr = "亲爱的".$fromUsername."。您的经度是：".$longitude."，您的纬度是：".$latitude."。距离西信：".$distance."M";
+                    $contentStr = "亲爱的".$fromUsername."。您的经度是：".$longitude."，您的纬度是：".$latitude."。距离西信：".$distance."米";
                     $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                     echo $resultStr;
                 }else{
